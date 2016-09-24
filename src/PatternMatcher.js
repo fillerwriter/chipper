@@ -7,7 +7,7 @@
  * @returns {Array.<*>}
  */
 export function findMatches(searchTerm, patterns = []) {
-  return patterns.filter((pattern) => {
+  const matchedPatterns = patterns.filter((pattern) => {
     let words = pattern.split(' ').map((word) => {
       switch (word) {
         case '*':
@@ -21,6 +21,20 @@ export function findMatches(searchTerm, patterns = []) {
 
     const regex = new RegExp(wordsString, 'i');
     return searchTerm.match(regex);
+  });
+
+  return rankPatterns(searchTerm, matchedPatterns);
+}
+
+function rankPatterns(searchTerm, patterns) {
+  return patterns.sort((a, b) => {
+    if (searchTerm == a) {
+      return -1;
+    }
+    if (searchTerm == b) {
+      return 1;
+    }
+    return 0;
   });
 }
 
