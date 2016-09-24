@@ -1,6 +1,14 @@
 "use strict";
 
 /**
+ * PatternMatcher provides a set of functions to filter responses based on pattern matching as
+ * described by the AIML 2.0 draft doc.
+ *
+ * https://docs.google.com/document/d/1wNT25hJRyupcG51aO89UcQEiG-HkXRXusukADpFnDs4/pub
+ * (See 5. (AIML Pattern Language)
+ */
+
+/**
  *
  * @param searchTerm
  * @param patterns
