@@ -17,7 +17,8 @@ describe('PatternMatcher', function() {
     const patterns = [
       'FOO',
       'FOO BAR',
-      'FOO *'
+      'FOO *',
+      'CARAT ^'
     ];
 
     it('Matches exact matches', function() {
@@ -33,6 +34,12 @@ describe('PatternMatcher', function() {
     it('Matches appropriate patterns containing a *', function() {
       expect(PatternMatcher.isMatch('FOO BAZ', patterns)).to.be.true;
       expect(PatternMatcher.isMatch('NOT A MATCH', patterns)).to.be.false;
+    });
+
+    it('Matches appropriate patterns containing a ^', function() {
+      expect(PatternMatcher.isMatch('CARAT', patterns)).to.be.true;
+      expect(PatternMatcher.isMatch('CARAT EXTRA', patterns)).to.be.true;
+      expect(PatternMatcher.isMatch('BAD CARAT', patterns)).to.be.false;
     });
   });
 

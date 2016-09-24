@@ -2,3 +2,4 @@ npm-debug.log
 node_modules
 data/aiml_backup
 .idea
+lib

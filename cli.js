@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var pkg = require('./package.json');
-var Surly = require('./src/Surly');
+var Surly = require('./lib/Surly');
 var conf = require('rc')('surly', {
     brain: '',      b: '',
     help: false,
@@ -41,7 +41,7 @@ process.stdin.addListener('data', function (d) {
 	var sentence = d.toString().substring(0, d.length - 1);
 
 	if (sentence === 'quit' || sentence === 'exit') {
-		console.log('Yeah, fuck off.');
+		console.log('Later.');
 		process.exit(0);
 	}
 

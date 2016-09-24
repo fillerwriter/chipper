@@ -27,7 +27,7 @@ module.exports = class Surly {
   * @param  {Function} callback
   * @return {String}
   */
-  talk (sentence, callback, user_id) {
+  talk (sentence, callback) {
     var i,
       start_time = new Date(),
       response;

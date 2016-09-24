@@ -2,10 +2,11 @@
 
 const fs = require('fs');
 const async = require('async');
-const BaseNode = require('./BaseNode');
 const libxmljs = require('libxmljs');
 const Category = require('./Category');
 const Logger = require('../Logger');
+import NormaliseInput from './NormaliseInput';
+
 
 /**
 * Main AIML handler. Contains a list of category nodes, potentially loaded
@@ -89,7 +90,7 @@ module.exports = class Aiml {
         var template = category.getTemplate();
         template.getText(callback);
       } else {
-        callback('No match.', 'Fuck knows.');
+        callback('No match.', `I don't understand.`);
       }
     }.bind(this));
   }
@@ -166,22 +167,9 @@ module.exports = class Aiml {
   normaliseSentence (sentence) {
     this.log.debug('normalising ', sentence);
 
-    // add spaces to prevent false positives
-    if (sentence.charAt(0) !== ' ') {
-      sentence = ' ' + sentence;
-    }
+    const normalized = NormaliseInput(sentence);
+    this.log.debug('normalized', normalized);
 
-    // Remove trailing punctuation - @todo use regex!
-    while (['!', '.', '?'].indexOf(sentence.charAt(sentence.length -1)) !== -1) {
-      sentence = sentence.substr(0, sentence.length - 1);
-    }
-
-    if (sentence.charAt(sentence.length - 1) !== ' ') {
-      sentence = sentence + ' ';
-    }
-
-    sentence = sentence.toUpperCase(); // @todo - remove this
-
-    return sentence;
+    return ` ${normalized} `;
   }
 };

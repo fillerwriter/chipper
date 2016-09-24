@@ -27,6 +27,7 @@ Installation
 
  1. Acquire code
  2. `npm install`
+ 3. `npm run compile`
 
 
 Config

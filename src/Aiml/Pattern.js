@@ -31,15 +31,6 @@ module.exports = class Pattern {
   * @return {Boolean}         True if sentence and pattern match
   */
   matchSentence (sentence) {
-    // Add spaces to prevent false positives
-    if (sentence.charAt(0) !== ' ') {
-      sentence = ' ' + sentence;
-    }
-
-    if (sentence.charAt(sentence.length - 1) !== ' ') {
-      sentence = sentence + ' ';
-    }
-
     sentence = sentence.toUpperCase();
 
     // var regex_pattern = this.aimlPatternToRegex(pattern);

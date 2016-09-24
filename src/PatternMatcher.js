@@ -19,13 +19,14 @@ export function findMatches(searchTerm, patterns = []) {
     let words = pattern.split(' ').map((word) => {
       switch (word) {
         case '*':
+        case '^':
           return '.*';
         default:
           return `\\b${word}\\b`;
       }
     });
 
-    let wordsString = words.join('');
+    let wordsString = `^${words.join('')}$`;
 
     const regex = new RegExp(wordsString, 'i');
     return searchTerm.match(regex);

@@ -4,7 +4,8 @@
   "description": "An AIML interpreter",
   "main": "src/Surly.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register --recursive"
+    "test": "mocha --compilers js:babel-register --recursive",
+    "compile": "babel -d lib src"
   },
   "author": "MrChimp <chimpytk@gmail.com> (http://deviouschimp.co.uk/)",
   "license": "ISC",
