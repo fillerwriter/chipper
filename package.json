@@ -4,6 +4,9 @@
   "description": "An AIML interpreter",
   "main": "src/Surly.js",
   "scripts": {
+    "start": "node cli.js",
+    "babel-node": "babel-node --presets=es2015 --ignore='foo|bar|baz'",
+    "dev-start": "nodemon --exec npm run babel-node -- cli.js",
     "test": "mocha --compilers js:babel-register --recursive",
     "compile": "babel -d lib src"
   },
@@ -12,6 +15,7 @@
   "dependencies": {
     "async": "^1.5.2",
     "babel": "^6.5.2",
+    "bunyan": "^1.8.1",
     "fs": "0.0.2",
     "libxmljs": "^0.18.0",
     "lodash": "^4.16.1",

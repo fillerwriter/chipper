@@ -5,10 +5,23 @@ const Stack = require('./stack');
 const Aiml = require('./Aiml/Aiml');
 const Environment = require('./Environment');
 const Logger = require('./Logger');
+const bunyan = require('bunyan');
+const path = require('path');
 
 module.exports = class Surly {
   constructor (options) {
     this.log = new Logger();
+    this.log2 = bunyan.createLogger({
+      name: 'surly3',
+      streams: [{
+        'level': 'error',
+        stream: process.stderr
+      },
+      {
+        level: 'debug',
+        path: path.join(__dirname, '../', 'logs/bunyan.log')
+      }]
+    });
     this.brain = [];
     this.input_stack = new Stack(10);
     this.callbacks = {};
@@ -33,6 +46,7 @@ module.exports = class Surly {
       response;
 
     this.log.debug('INPUT: ' + sentence);
+    this.log2.info(`Input: ${sentence}`);
     this.input_stack.push(sentence);
 
     if (sentence.length === 0) {
