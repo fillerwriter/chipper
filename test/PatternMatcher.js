@@ -46,13 +46,14 @@ describe('PatternMatcher', function() {
   describe('.matchPatterns', function() {
     const patterns = [
       'FOO *',
+      'FOO ^',
       'FOO'
     ];
 
     it('returns an array of ranked patterns, based on specificity', function() {
-      const matchedPatterns = PatternMatcher.findMatches('FOO', patterns);
+      const matchedPatterns = PatternMatcher.findMatches('FOO BAR', patterns);
       expect(matchedPatterns.length).to.equal(2);
-      expect(matchedPatterns[0]).to.equal('FOO');
+      expect(matchedPatterns[0]).to.equal('FOO ^');
     });
   });
 });

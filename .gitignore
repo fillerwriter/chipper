@@ -3,3 +3,4 @@ node_modules
 data/aiml_backup
 .idea
 lib
+.DS_Store

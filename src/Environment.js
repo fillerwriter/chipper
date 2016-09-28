@@ -93,6 +93,7 @@ module.exports = class Environment {
     this.wildcard_stack = new Stack(10);
     this.previous_inputs = [];
     this.previous_responses = [];
+    this.state = {};
   }
 
   /**
@@ -203,6 +204,14 @@ module.exports = class Environment {
     }
 
     return '';
+  }
+
+  import(newState = {}) {
+    this.state = newState;
+  }
+
+  export() {
+    return this.state;
   }
 };
 

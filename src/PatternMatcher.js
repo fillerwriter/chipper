@@ -1,5 +1,7 @@
 "use strict";
 
+const _ = require('lodash');
+
 /**
  * PatternMatcher provides a set of functions to filter responses based on pattern matching as
  * described by the AIML 2.0 draft doc.
@@ -19,7 +21,11 @@ export function findMatches(searchTerm, patterns = []) {
     let words = pattern.split(' ').map((word) => {
       switch (word) {
         case '*':
+        case '_':
+          return '.+';
         case '^':
+        case '#':
+        case '$':
           return '.*';
         default:
           return `\\b${word}\\b`;
@@ -36,14 +42,36 @@ export function findMatches(searchTerm, patterns = []) {
 }
 
 function rankPatterns(searchTerm, patterns) {
+  const searchPatternsRankings = [
+    (searchTerm, pattern) => {
+      return pattern.indexOf('$') !== -1;
+    },
+    (searchTerm, pattern) => {
+      return pattern.indexOf('#') !== -1;
+    },
+    (searchTerm, pattern) => {
+      return pattern.indexOf('_') !== -1;
+    },
+    (searchTerm, pattern) => {
+      return searchTerm === pattern;
+    },
+    (searchTerm, pattern) => {
+      return pattern.indexOf('^') !== -1;
+    },
+    (searchTerm, pattern) => {
+      return pattern.indexOf('*') !== -1;
+    }
+  ];
+
   return patterns.sort((a, b) => {
-    if (searchTerm == a) {
-      return -1;
-    }
-    if (searchTerm == b) {
-      return 1;
-    }
-    return 0;
+    let itemA = _.findIndex(searchPatternsRankings, function(fn) {
+      return fn(searchTerm, a);
+    });
+    let itemB = _.findIndex(searchPatternsRankings, function(fn) {
+      return fn(searchTerm, b);
+    });
+
+    return itemA - itemB;
   });
 }
 
