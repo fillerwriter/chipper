@@ -18,7 +18,9 @@ describe('PatternMatcher', function() {
       'FOO',
       'FOO BAR',
       'FOO *',
-      'CARAT ^'
+      'CARAT ^',
+      'POUND #',
+      'DOLLAR $'
     ];
 
     it('Matches exact matches', function() {
@@ -41,6 +43,8 @@ describe('PatternMatcher', function() {
       expect(PatternMatcher.isMatch('CARAT EXTRA', patterns)).to.be.true;
       expect(PatternMatcher.isMatch('BAD CARAT', patterns)).to.be.false;
     });
+
+
   });
 
   describe('.matchPatterns', function() {
@@ -50,10 +54,21 @@ describe('PatternMatcher', function() {
       'FOO'
     ];
 
+    const greedyMatch = [
+      'FOO *',
+      'FOO * *'
+    ];
+
     it('returns an array of ranked patterns, based on specificity', function() {
       const matchedPatterns = PatternMatcher.findMatches('FOO BAR', patterns);
       expect(matchedPatterns.length).to.equal(2);
       expect(matchedPatterns[0]).to.equal('FOO ^');
+    });
+
+    it.skip('matches against multiple words when needed', function() {
+      expect(PatternMatcher.findMatches('FOO BAR', greedyMatch).length).to.equal(1);
+      expect(PatternMatcher.findMatches('FOO BAR BAZ', greedyMatch).length).to.equal(2);
+      expect(PatternMatcher.findMatches('FOO HERE IS A REALLY LONG SENTENCE', greedyMatch).length).to.equal(2);
     });
   });
 });
