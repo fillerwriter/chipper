@@ -75,16 +75,8 @@ module.exports = class Surly {
   * Do any extra stuff that needs doing with the results
   */
   handleResult (sentence, response) {
-    // process.exit();
-    // var end_time = new Date();
-    //
-    // this.log('OUTPUT: ' + response + ' (' + (end_time - start_time) + 'ms)');
-    // this.respond(response);
 
-    // @todo this!
-    // if (response) {
-    //   previousResponse = this.normaliseTemplate(template);
-    // }
+    // @todo this! sadf sadf sa asdf sdf asdf sadf sdf saf s
 
     var normal_previous = this.aiml.normaliseSentence(response).trim();
     this.environment.previous_responses.push(normal_previous);
