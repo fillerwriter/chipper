@@ -4,6 +4,7 @@ var babel = require("gulp-babel");
 var concat = require("gulp-concat");
 var watch = require('gulp-watch');
 var plumber = require('gulp-plumber');
+var nodemon = require('gulp-nodemon');
 
 gulp.task("babel", function () {
   return gulp.src("src/**/*.js")
@@ -19,6 +20,15 @@ gulp.task("watch", function() {
       .pipe(babel())
       .pipe(gulp.dest("lib"));
   });
+});
+
+gulp.task("start", function() {
+  nodemon({
+    script: "cli.js",
+    ext: "js",
+    tasks: ["babel"],
+    ignore: ["node_modules", "lib"]
+  })
 });
 
 gulp.task("default", ["watch"]);
