@@ -113,7 +113,7 @@ module.exports = class BaseNode {
           this.children.push(new Version(child_nodes[i], this.surly));
           break;
         default:
-          this.children.push(new TextNode('[NOT IMPLEMENTED: ' + node_type + ']', this.surly));
+          this.children.push(new TextNode(child_nodes[i], this.surly));
       }
     }
   }
