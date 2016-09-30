@@ -5,8 +5,9 @@ const async = require('async');
 const libxmljs = require('libxmljs');
 const Category = require('./Category');
 const Logger = require('../Logger');
-import NormaliseInput from './NormaliseInput';
 
+import NormaliseInput from './NormaliseInput';
+import AIMLDirLoader from './AIMLDirLoader';
 
 /**
 * Main AIML handler. Contains a list of category nodes, potentially loaded
@@ -120,21 +121,27 @@ module.exports = class Aiml {
    * @return {Undefined}
    */
   loadDir (dir, callback) {
-    var files = fs.readdirSync(dir);
+    let that = this;
 
-    this.log.debug('Loading dir' + dir);
+    return AIMLDirLoader(dir)
+      .then(function(files) {
+        that.log.debug('Loading dir' + dir);
 
-    for (var i in files) {
-      if (!files.hasOwnProperty(i)) continue;
+        for (var i in files) {
+          if (!files.hasOwnProperty(i)) continue;
 
-      var name = dir + '/' + files[i];
+          var name = dir + '/' + files[i];
 
-      if (fs.statSync(name).isDirectory()) {
-        this.log.debug('Ignoring directory: ' + name);
-      } else if (name.substr(-5).toLowerCase() === '.aiml') {
-        this.loadFile(name, callback);
-      }
-    }
+          if (fs.statSync(name).isDirectory()) {
+            that.log.debug('Ignoring directory: ' + name);
+          } else if (name.substr(-5).toLowerCase() === '.aiml') {
+            that.loadFile(name, callback);
+          }
+        }
+      })
+      .catch(function(e) {
+
+      });
   }
 
   /**
