@@ -15,7 +15,7 @@ export default function AIMLDirLoader(dir) {
       '.set',
       '.substitution',
       '.pdefaults',
-      '.propoerties'
+      '.properties'
     ];
     fs.readdir(dir, function(err, files) {
       if (err) {

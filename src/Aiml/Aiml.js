@@ -27,7 +27,6 @@ module.exports = class Aiml {
    */
   wipe () {
     this.categories = [];
-    this.topics = ['*'];
   }
 
   /**

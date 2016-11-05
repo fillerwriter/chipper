@@ -22,10 +22,7 @@ module.exports = class Surly {
         path: path.join(__dirname, '../', 'logs/bunyan.log')
       }]
     });
-    this.brain = [];
     this.input_stack = new Stack(10);
-    this.callbacks = {};
-    this.callbacks.respond = options.respond;
     this.environment = new Environment();
     this.aiml = new Aiml({
       surly: this
@@ -56,7 +53,7 @@ module.exports = class Surly {
 
     if (sentence.substr(0,1) === '/') {
       this.log.debug('Skipping command string.'); // @todo - do stuff
-      this.respond('COMMANDS DO NOTHING YET.');
+      callback('COMMANDS DO NOTHING YET.', 'No commands for me.');
       return;
     }
 
