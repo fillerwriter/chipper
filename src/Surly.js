@@ -72,9 +72,6 @@ module.exports = class Surly {
   * Do any extra stuff that needs doing with the results
   */
   handleResult (sentence, response) {
-
-    // @todo this! sadf sadf s
-
     var normal_previous = this.aiml.normaliseSentence(response).trim();
     this.environment.previous_responses.push(normal_previous);
     this.environment.previous_inputs.push(sentence);
