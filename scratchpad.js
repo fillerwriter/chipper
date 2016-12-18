@@ -19,9 +19,9 @@ let aimlTags = {
   'srai': function(input, brain) {
     return processTemplate(input, brain);
   },
-  'br': function(input, brain) {
-    return '\n';
-  }
+  // 'br': function(input, brain) {
+  //   return '\n';
+  // }
 };
 
 let brain = buildBrain(aiml);
