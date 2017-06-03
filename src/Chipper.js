@@ -19,6 +19,6 @@ export function createSession() {
   return new ChatSession();
 };
 
-export function talk(session) {
+export function talk(input, session) {
 
 };
