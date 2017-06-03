@@ -1,5 +1,7 @@
-Surly2
+Surly3
 ======
+
+A rewrite of Surly2 from [mrchimp](http://github.com/mrchimp/surly), with a focus on testability.
 
 > **surly** *adjective*
 >

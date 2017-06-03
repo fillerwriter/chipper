@@ -9,7 +9,10 @@
     "test": "mocha --compilers js:babel-register --recursive",
     "compile": "babel -d lib src"
   },
-  "author": "MrChimp <chimpytk@gmail.com> (http://deviouschimp.co.uk/)",
+  "author": "Brandon Morrison <brandon@brandonmorrison.com> (http://brandonmorrison.com)",
+  "contributors": [
+    "MrChimp <chimpytk@gmail.com> (http://deviouschimp.co.uk/)"
+  ],
   "license": "ISC",
   "dependencies": {
     "async": "^1.5.2",
