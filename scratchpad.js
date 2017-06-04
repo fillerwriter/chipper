@@ -6,4 +6,4 @@ let bot = new Chipper({
   'aiml': 'data/aiml_simple/simple.aiml'
 });
 
-console.log(bot.talk('HI'));
+console.log(bot.talk('hello'));

@@ -1,14 +1,11 @@
 "use strict";
 
-const Logger = require('./Logger');
-
 /**
  * Handles the AIML chat environment. Keeps track of variables, bot attributes,
  * user attributes etc.
  */
 module.exports = class Environment {
   constructor () {
-    this.log = new Logger();
     this.bot_attributes = { // @todo - store these somewhere more appropriate
       "age": "1",
       "arch": "Linux",
@@ -90,7 +87,7 @@ module.exports = class Environment {
       'A blueberry muffin',
       'Sweden'
     ];
-    this.wildcard_stack = new Stack(10);
+    // this.wildcard_stack = new Stack(10);
     this.previous_inputs = [];
     this.previous_responses = [];
     this.state = {};
@@ -214,5 +211,3 @@ module.exports = class Environment {
     return this.state;
   }
 };
-
-var Stack = require('./stack');

@@ -1,33 +1,40 @@
 "use strict";
 
-import ChatSession from "./ChatSession";
 import bunyan from "bunyan";
 import libxmljs from "libxmljs";
 import fs from 'fs';
+import * as _ from 'lodash';
 
-function Chipper(options = {}) {
-  let aimlSource = (options.aiml) ? options.aiml : 'data/aiml_simple/simple.aiml';
+import ChatSession from "./ChatSession";
+import * as PatternMatcher from "./PatternMatcher";
 
-  if (options.logger) {
-    this._logger = options.logger;
-  } else {
-    this._logger = bunyan.createLogger({name: 'Chipper'});
+class Chipper {
+
+  constructor(options = {}) {
+    let aimlSource = (options.aiml) ? options.aiml : 'data/aiml_simple/simple.aiml';
+    var logger = undefined;
+
+    if (options.logger) {
+      logger = options.logger;
+    } else {
+      logger = bunyan.createLogger({name: 'Chipper'});
+    }
+
+    this.logger = function() {
+      return logger;
+    };
+
+    this.brain = buildBrain(fs.readFileSync(aimlSource));
   }
 
-  this.brain = buildBrain(fs.readFileSync(aimlSource));
+  talk(input) {
+    return parse(input, this.brain, this.logger());
+  }
+
+  environment() {
+
+  }
 }
-
-Chipper.prototype.talk = function(input) {
-  return parse(input, this.brain, this._logger);
-};
-
-Chipper.prototype.logger = function() {
-  return {};
-};
-
-Chipper.prototype.environment = function() {
-
-};
 
 export default Chipper;
 
@@ -75,7 +82,9 @@ function parse(input, brain, logger) {
 
 function processTemplate(input, brain, logger) {
   logger.info("process template", input);
-  let template = libxmljs.parseXml(`<wrapper>${brain[input]}</wrapper>`).childNodes();
+
+  let responsePatterns = PatternMatcher.findMatches(input, _.keys(brain));
+  let template = libxmljs.parseXml(`<wrapper>${brain[responsePatterns[0]]}</wrapper>`).childNodes();
   let output = '';
 
   template.forEach(function(item) {
@@ -90,7 +99,6 @@ function processTemplate(input, brain, logger) {
     }
   });
 
-  //console.log("OUTPUT", output);
-
+  logger.info("Output snippet", output);
   return output;
 }

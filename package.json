@@ -23,7 +23,6 @@
     "bunyan": "^1.8.1",
     "libxmljs": "^0.18.0",
     "lodash": "^4.16.1",
-    "node-xmpp-client": "^3.0.0",
     "rc": "^1.1.6",
     "shortid": "^2.2.6"
   },
