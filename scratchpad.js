@@ -58,13 +58,13 @@ function processTemplate(input, brain) {
   let output = '';
 
   template.forEach(function(item) {
-    if (item.type() == 'element') {
+    if (item.type() === 'element') {
       if (aimlTags[item.name()]) {
         output += aimlTags[item.name()](item.text(), brain);
       } else {
         output += item.toString();
       }
-    } else if (item.type() == 'text') {
+    } else if (item.type() === 'text') {
       output += item.toString();
     }
   });

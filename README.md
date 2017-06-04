@@ -1,21 +1,7 @@
-Surly3
+Chipper
 ======
 
-A rewrite of Surly2 from [mrchimp](http://github.com/mrchimp/surly), with a focus on testability.
-
-> **surly** *adjective*
->
->  1. bad-tempered and unfriendly
-
-Surly2 is a half-complete node.js AIML interpreter with a bad attitude.
-
-Surly2 is a remake from the ground up of [Surly](http://github.com/mrchimp/surly) using Node 5 and using as much asynchronicity as possible.
-
-
-Status
-======
-
-Actually works quite well so far but not everything is implemented. Even so, I wouldn't try using it for anything serious quite yet. Check out `COVERAGE.md` for full details.
+A rewrite of Surly2 from [mrchimp](http://github.com/mrchimp/surly2), with a focus on testability.
 
 
 Requirements

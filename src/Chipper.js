@@ -17,8 +17,8 @@ let log = bunyan.createLogger({
 
 export function createSession() {
   return new ChatSession();
-};
+}
 
 export function talk(input, session) {
 
-};
+}

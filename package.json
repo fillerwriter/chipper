@@ -1,8 +1,11 @@
 {
-  "name": "surly2",
-  "version": "2.0.0-beta",
+  "name": "chipper",
+  "version": "0.1.0",
   "description": "An AIML interpreter",
-  "main": "src/Surly.js",
+  "engines": {
+    "node": ">=7.9.0"
+  },
+  "main": "lib/Chipper.js",
   "scripts": {
     "start": "node cli.js",
     "babel-node": "babel-node --presets=es2015 --ignore='foo|bar|baz'",
