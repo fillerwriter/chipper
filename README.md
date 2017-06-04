@@ -1,6 +1,8 @@
 Chipper
 ======
 
+[![CircleCI](https://circleci.com/gh/fillerwriter/chipper.svg?style=svg)](https://circleci.com/gh/fillerwriter/chipper)
+
 A rewrite of Surly2 from [mrchimp](http://github.com/mrchimp/surly2), with a focus on testability.
 
 
