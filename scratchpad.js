@@ -7,7 +7,7 @@ const aiml = `<?xml version="1.0" encoding="utf-8"?>
 <aiml>
 	<category>
 		<pattern>HELLO</pattern>
-		<template>Foo<br />Bar</template>
+		<template>Foo<br />Bar <date /></template>
 	</category>
 	<category>
 	  <pattern>HI</pattern>
@@ -18,6 +18,9 @@ const aiml = `<?xml version="1.0" encoding="utf-8"?>
 let aimlTags = {
   'srai': function(input, brain) {
     return processTemplate(input, brain);
+  },
+  'date': function(input, brain) {
+    return new Date().toISOString();
   },
   // 'br': function(input, brain) {
   //   return '\n';

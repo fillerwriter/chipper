@@ -17,7 +17,7 @@ describe('Environment', function() {
         ['bar', 'barbar'],
         ['baz', 'bazbaz']
       ]
-    }
+    };
 
     env.import(envState);
     expect(env.export()).to.deep.equal(envState);

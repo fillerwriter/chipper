@@ -3,22 +3,17 @@
 import ChatSession from "./ChatSession";
 import bunyan from "bunyan";
 
-let log = bunyan.createLogger({
-  name: 'chipper',
-  streams: [{
-    'level': 'error',
-    stream: process.stderr
-  },
-    {
-      level: 'debug',
-      path: path.join(__dirname, '../', 'logs/bunyan.log')
-    }]
-});
-
-export function createSession() {
-  return new ChatSession();
+function Chipper(options) {
+  this.foo = 'bar';
+  // this.talk = 'fail';
 }
 
-export function talk(input, session) {
+Chipper.prototype.talk = function() {
 
-}
+};
+
+Chipper.prototype.logger = function() {
+
+};
+
+export default Chipper;
