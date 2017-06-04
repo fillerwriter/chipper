@@ -15,8 +15,12 @@ describe('Chipper', function() {
     expect(bot).to.be.truthy;
     expect(bot).to.respondTo('talk');
     expect(bot).to.respondTo('logger');
+    expect(bot).to.respondTo('environment');
   });
 
+  it('has sane defaults', function() {
+
+  });
 
   describe('.talk', function() {
     it('placeholder', function() {
@@ -25,6 +29,12 @@ describe('Chipper', function() {
   });
 
   describe('.logger', function() {
+    it('expects there to be a logger when none is defined on initialization.', function() {
+      expect(bot.logger()).to.be.a('object');
+    });
+  });
+
+  describe('.environment', function() {
     it('placeholder', function() {
       expect(true).to.be.truthy;
     });
