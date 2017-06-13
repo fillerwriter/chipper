@@ -10,7 +10,7 @@ describe('Environment', function() {
     env = new Environment();
   });
 
-  it("Expects the ability to dump and import a working copy of the environment state.", function() {
+  it("Expects the ability to dump and importState a working copy of the environment state.", function() {
     const envState = {
       substitutions: [
         ['foo', 'foofoo'],
@@ -19,7 +19,7 @@ describe('Environment', function() {
       ]
     };
 
-    env.import(envState);
-    expect(env.export()).to.deep.equal(envState);
+    env.importState(envState);
+    expect(env.exportState()).to.deep.equal(envState);
   });
 });

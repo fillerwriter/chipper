@@ -1,8 +1,5 @@
 "use strict";
 
-var BaseNode = require('../BaseNode');
-var Surly = require('../../Surly');
-
 /**
  * From AIML Spec
  * http://www.alicebot.org/TR/2001/WD-aiml/#section-srai
@@ -21,23 +18,9 @@ var Surly = require('../../Surly');
  *    <!-- Contents: aiml-template-elements -->
  * </aiml:srai>
  */
-module.exports = class Srai extends BaseNode {
 
-  /**
-   * Constructor method
-   * @param  {Node} node Xmllibjs node object
-   */
-  constructor (node, surly) {
-    super(node, surly);
-    this.type = 'srai';
-    this.content = node.text().toString();
-  }
+import processTemplate from "../ProcessTemplate";
 
-  /**
-   * Return content as text
-   * @return {String}
-   */
-  getText (callback) {
-    this.surly.talk(this.content, callback);
-  }
-};
+export default function Srai(input, brain, logger) {
+  return processTemplate(input, brain, logger);
+}

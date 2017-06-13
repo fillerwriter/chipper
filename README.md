@@ -9,7 +9,7 @@ A rewrite of Surly2 from [mrchimp](http://github.com/mrchimp/surly2), with a foc
 Requirements
 ============
 
-[Node.js](https://nodejs.org/)
+- [Node.js](https://nodejs.org/) v 7.9.x or greater
 
 
 Installation
