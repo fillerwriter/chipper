@@ -6,6 +6,13 @@ import * as _ from 'lodash';
 import * as PatternMatcher from "../PatternMatcher";
 import aimlTags from "./AimlTags";
 
+/**
+ * Simple parsing of input from a user using a key=>map dataset.
+ * @param input
+ * @param brain
+ * @param logger
+ * @returns {string}
+ */
 export default function processTemplate(input, brain, logger) {
   logger.info("process template", input);
 

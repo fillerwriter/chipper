@@ -1,12 +1,11 @@
 "use strict";
 
 import srai from "./Template/Srai";
+import date from "./Template/DateNode";
 
 export default {
   'srai': srai,
-  'date': function(input, brain) {
-    return new Date().toISOString();
-  },
+  'date': date
   // 'br': function(input, brain) {
   //   return '\n';
   // }
