@@ -14,7 +14,7 @@ import srai from "../../../src/Aiml/Template/Srai";
 
 describe("AIML - srai tag", function() {
   before(function() {
-    processTemplate = sinon.stub().returns("");
+    //processTemplate = sinon.stub().returns("");
   });
 
   // @TODO: This check needs better stubbing. Look at proxyquire as an option for
