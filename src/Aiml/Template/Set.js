@@ -1,7 +1,5 @@
 "use strict";
 
-var BaseNode = require('../BaseNode');
-
 /**
  * From AIML Spec
  * http://www.alicebot.org/TR/2001/WD-aiml/#section-set
@@ -31,19 +29,32 @@ var BaseNode = require('../BaseNode');
  *    <!-- Contents: aiml-template-elements -->
  * </aiml:set>
  */
-module.exports = class Set extends BaseNode {
-  constructor (node, surly) {
-    super(node, surly);
-    this.type = 'set';
-    this.name = node.attr('name').value();
-  }
+// module.exports = class Set extends BaseNode {
+//   constructor (node, surly) {
+//     super(node, surly);
+//     this.type = 'set';
+//     this.name = node.attr('name').value();
+//   }
+//
+//   getText (callback) {
+//     super.evaluateChildren(function (err, text) {
+//       this.surly.environment.setVariable(this.name, text);
+//     }.bind(this));
+//
+//     // @todo implement return-name-when-set. See AIML spec section 7.4.1
+//     callback(null, '');
+//   }
+// };
 
-  getText (callback) {
-    super.evaluateChildren(function (err, text) {
-      this.surly.environment.setVariable(this.name, text);
-    }.bind(this));
 
-    // @todo implement return-name-when-set. See AIML spec section 7.4.1
-    callback(null, '');
-  }
-};
+// @TODO: Set doesn't work yet because the input from upstream doesn't contain the raw xml content
+// from the child tag of Set.
+import processTemplate from "../ProcessTemplate";
+
+export default function Set(input, session, environment, logger) {
+  console.log(input);
+  session.values[input.attributes.var] = processTemplate(input, session, environment, logger);
+
+  return "";
+}
+

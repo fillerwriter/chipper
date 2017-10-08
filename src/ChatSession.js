@@ -9,5 +9,7 @@ export default class ChatSession {
     this.prevChat = [];
     this.prevResponses = [];
     this.topic = '*';
+
+    this.values = {};
   }
 };

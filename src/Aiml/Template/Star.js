@@ -1,7 +1,5 @@
 "use strict";
 
-var BaseNode = require('../BaseNode');
-
 /**
  * From AIML Spec
  * http://www.alicebot.org/TR/2001/WD-aiml/#section-star
@@ -24,27 +22,68 @@ var BaseNode = require('../BaseNode');
  * <!-- Category: aiml-template-elements -->
  * <aiml:star index = single-integer-index />
  */
-module.exports = class Star extends BaseNode {
-  constructor (node, surly) {
-    super(node, surly);
+// module.exports = class Star extends BaseNode {
+//   constructor (node, surly) {
+//     super(node, surly);
+//
+//     this.type = 'star';
+//
+//     if (node.attr('index')) {
+//       this.index = node.attr('index').value() - 1;
+//     } else {
+//       this.index = 0;
+//     }
+//   }
+//
+//   getText (callback) {
+//     var wildcards = this.surly.environment.wildcard_stack.getLast();
+//
+//     if (typeof wildcards[this.index] === 'undefined') {
+//       this.log.log('ERROR: STAR with no matching * value.');
+//       callback('Star with no matching * value.', 'ERROR!');
+//     } else {
+//       callback(null, wildcards[this.index]);
+//     }
+//   }
+// };
 
-    this.type = 'star';
+// input - raw
+//       - normalized
+//       - wildcards
+//       - pattern
+//       - inputOptions
 
-    if (node.attr('index')) {
-      this.index = node.attr('index').value() - 1;
-    } else {
-      this.index = 0;
-    }
+export default function Star(input, session, environment, logger) {
+  console.log("STAR");
+  console.log(input);
+  let wildcardValues = getWildCardValues(input.normalized, input.pattern);
+  return wildcardValues[0];
+}
+
+function getWildCardValues (input, pattern) {
+  let replace_array = pattern.split('*');
+
+  for(let replacementItem in replace_array) {
+    input = input.replace(replace_array[replacementItem], '|');
   }
 
-  getText (callback) {
-    var wildcards = this.surly.environment.wildcard_stack.getLast();
+  // split by pipe and we're left with values and empty strings
+  input = input.trim().split('|');
 
-    if (typeof wildcards[this.index] === 'undefined') {
-      this.log.log('ERROR: STAR with no matching * value.');
-      callback('Star with no matching * value.', 'ERROR!');
-    } else {
-      callback(null, wildcards[this.index]);
+  let output = [];
+  let chunk = '';
+
+  for (let i = 0; i < input.length; i++) {
+    chunk = input[i].trim();
+
+    if (chunk === '') continue;
+
+    if (chunk.charAt(chunk.length - 1) === '?') {
+      chunk = chunk.substr(0, chunk.length - 1);
     }
+
+    output.push(chunk);
   }
-};
+
+  return output;
+}

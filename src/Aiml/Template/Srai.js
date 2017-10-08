@@ -21,6 +21,6 @@
 
 import processTemplate from "../ProcessTemplate";
 
-export default function Srai(input, brain, logger) {
-  return processTemplate(input, brain, logger);
+export default function Srai(input, session, environment, logger) {
+  return processTemplate(input, session, environment, logger);
 }
