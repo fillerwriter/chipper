@@ -52,7 +52,7 @@
 import processTemplate from "../ProcessTemplate";
 
 export default function Set(input, session, environment, logger) {
-  console.log(input);
+  input.template = input.raw;
   session.values[input.attributes.var] = processTemplate(input, session, environment, logger);
 
   return "";

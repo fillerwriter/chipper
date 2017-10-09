@@ -47,43 +47,7 @@
 //   }
 // };
 
-// input - raw
-//       - normalized
-//       - wildcards
-//       - pattern
-//       - inputOptions
-
 export default function Star(input, session, environment, logger) {
-  console.log("STAR");
-  console.log(input);
-  let wildcardValues = getWildCardValues(input.normalized, input.pattern);
-  return wildcardValues[0];
-}
-
-function getWildCardValues (input, pattern) {
-  let replace_array = pattern.split('*');
-
-  for(let replacementItem in replace_array) {
-    input = input.replace(replace_array[replacementItem], '|');
-  }
-
-  // split by pipe and we're left with values and empty strings
-  input = input.trim().split('|');
-
-  let output = [];
-  let chunk = '';
-
-  for (let i = 0; i < input.length; i++) {
-    chunk = input[i].trim();
-
-    if (chunk === '') continue;
-
-    if (chunk.charAt(chunk.length - 1) === '?') {
-      chunk = chunk.substr(0, chunk.length - 1);
-    }
-
-    output.push(chunk);
-  }
-
-  return output;
+  let index = (input.attributes.index) ? input.attributes.index : 0;
+  return input.wildcards[index];
 }

@@ -6,8 +6,8 @@ let bot = new Chipper({
   'aiml': 'data/aiml_simple/simple.aiml'
 });
 
-bot.talk('Set bar')
+bot.talk('set foo bar')
   .then((result) => {
-    console.log(result);
+    console.log("Output: " + result);
     console.log(bot.session());
   });

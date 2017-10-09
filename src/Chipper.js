@@ -4,11 +4,13 @@ import bunyan from "bunyan";
 import libxmljs from "libxmljs";
 import fs from 'fs';
 import Promise from "bluebird";
+import _ from "lodash";
 
 import ChatSession from "./ChatSession";
 import Environment from "./Environment";
 import processTemplate from "./Aiml/ProcessTemplate";
 import inputProcessor from "./Aiml/InputProcessor";
+import * as PatternMatcher from "./PatternMatcher";
 
 class Chipper {
 
@@ -83,5 +85,40 @@ function buildBrain(xmlDoc, logger) {
  */
 function parse(rawInput, session, environment, logger) {
   const processedInput = inputProcessor(rawInput);
+
+  let responsePatterns = PatternMatcher.findMatches(processedInput.normalized, _.keys(environment));
+
+  processedInput.template = environment[responsePatterns[0]];
+  processedInput.wildcards = getWildCardValues(processedInput.normalized, responsePatterns[0]);
+
   return processTemplate(processedInput, session, environment, logger);
+}
+
+// @TODO: Move to tested method.
+function getWildCardValues (input, pattern) {
+  let replace_array = pattern.split('*');
+
+  for(let replacementItem in replace_array) {
+    input = input.replace(replace_array[replacementItem], '|');
+  }
+
+  // split by pipe and we're left with values and empty strings
+  input = input.trim().split('|');
+
+  let output = [];
+  let chunk = '';
+
+  for (let i = 0; i < input.length; i++) {
+    chunk = input[i].trim();
+
+    if (chunk === '') continue;
+
+    if (chunk.charAt(chunk.length - 1) === '?') {
+      chunk = chunk.substr(0, chunk.length - 1);
+    }
+
+    output.push(chunk);
+  }
+
+  return output;
 }

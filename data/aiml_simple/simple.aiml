@@ -5,8 +5,8 @@
         <template><star index="1"></star></template>
     </category>
     <category>
-        <pattern>SET *</pattern>
-        <template>Setting <set var="foo">bar</set></template>
+        <pattern>SET * *</pattern>
+        <template>Setting <set var="foo"><star index="1"></star></set></template>
     </category>
     <category>
         <pattern>HELLO</pattern>
