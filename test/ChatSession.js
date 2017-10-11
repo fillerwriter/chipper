@@ -11,6 +11,6 @@ describe('ChatSession', function() {
   });
 
   it("expects a session to have a session id", function() {
-    expect(session.sessionID).to.be.truthy;
+    expect(session.sessionID).to.exist;
   });
 });

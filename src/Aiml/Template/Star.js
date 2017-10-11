@@ -1,7 +1,5 @@
 "use strict";
 
-var BaseNode = require('../BaseNode');
-
 /**
  * From AIML Spec
  * http://www.alicebot.org/TR/2001/WD-aiml/#section-star
@@ -24,27 +22,32 @@ var BaseNode = require('../BaseNode');
  * <!-- Category: aiml-template-elements -->
  * <aiml:star index = single-integer-index />
  */
-module.exports = class Star extends BaseNode {
-  constructor (node, surly) {
-    super(node, surly);
+// module.exports = class Star extends BaseNode {
+//   constructor (node, surly) {
+//     super(node, surly);
+//
+//     this.type = 'star';
+//
+//     if (node.attr('index')) {
+//       this.index = node.attr('index').value() - 1;
+//     } else {
+//       this.index = 0;
+//     }
+//   }
+//
+//   getText (callback) {
+//     var wildcards = this.surly.environment.wildcard_stack.getLast();
+//
+//     if (typeof wildcards[this.index] === 'undefined') {
+//       this.log.log('ERROR: STAR with no matching * value.');
+//       callback('Star with no matching * value.', 'ERROR!');
+//     } else {
+//       callback(null, wildcards[this.index]);
+//     }
+//   }
+// };
 
-    this.type = 'star';
-
-    if (node.attr('index')) {
-      this.index = node.attr('index').value() - 1;
-    } else {
-      this.index = 0;
-    }
-  }
-
-  getText (callback) {
-    var wildcards = this.surly.environment.wildcard_stack.getLast();
-
-    if (typeof wildcards[this.index] === 'undefined') {
-      this.log.log('ERROR: STAR with no matching * value.');
-      callback('Star with no matching * value.', 'ERROR!');
-    } else {
-      callback(null, wildcards[this.index]);
-    }
-  }
-};
+export default function Star(input, session, environment, logger) {
+  let index = (input.attributes.index) ? input.attributes.index : 0;
+  return input.wildcards[index];
+}

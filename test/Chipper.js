@@ -12,7 +12,7 @@ describe('Chipper', function() {
   });
 
   it('exists and has methods', function() {
-    expect(bot).to.be.truthy;
+    expect(bot).to.exist;
     expect(bot).to.respondTo('talk');
     expect(bot).to.respondTo('logger');
     expect(bot).to.respondTo('environment');
@@ -24,7 +24,7 @@ describe('Chipper', function() {
 
   describe('.talk', function() {
     it('placeholder', function() {
-      expect(true).to.be.truthy;
+      expect(true).to.exist;
     });
   });
 
@@ -35,8 +35,8 @@ describe('Chipper', function() {
   });
 
   describe('.environment', function() {
-    it('placeholder', function() {
-      expect(true).to.be.truthy;
+    it('expects .environment() method to return Environment object.', function() {
+      expect(bot.environment()).to.exist;
     });
   });
 });

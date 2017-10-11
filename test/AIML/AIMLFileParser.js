@@ -22,14 +22,14 @@ import AIMLFileParser from "../../src/Aiml/AIMLFileParser";
 
 describe("AIMLFileParser", function() {
   it("sanity check", function() {
-    return expect(AIMLFileParser).to.be.truthy;
+    return expect(AIMLFileParser).to.exist;
   });
 
   it("can parse a simple AIML file", function() {
     let brain = AIMLFileParser(aiml);
 
     expect(Object.keys(brain).length).to.equal(2);
-    expect(brain['HELLO']).to.be.truthy;
-    expect(brain['HI']).to.be.truthy;
+    expect(brain['HELLO']).to.exist;
+    expect(brain['HI']).to.exist;
   });
 });

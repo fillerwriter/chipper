@@ -28,11 +28,11 @@ export function findMatches(searchTerm, patterns = []) {
         case '$':
           return '.*';
         default:
-          return `\\b${word}\\b`;
+          return `${word}`;
       }
     });
 
-    let wordsString = `^${words.join('')}$`;
+    let wordsString = `^${words.join(' ')}$`;
 
     const regex = new RegExp(wordsString, 'i');
     return searchTerm.match(regex);

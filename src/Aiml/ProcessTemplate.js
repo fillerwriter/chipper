@@ -5,25 +5,49 @@ import * as _ from 'lodash';
 
 import * as PatternMatcher from "../PatternMatcher";
 import aimlTags from "./AimlTags";
+import InputProcessor from "./InputProcessor";
 
 /**
  * Simple parsing of input from a user using a key=>map dataset.
  * @param input
- * @param brain
+ * @param session
+ * @param environment
  * @param logger
  * @returns {string}
  */
-export default function processTemplate(input, brain, logger) {
+
+export default function processTemplate(input, session, environment, logger) {
   logger.info("process template", input);
 
-  let responsePatterns = PatternMatcher.findMatches(input, _.keys(brain));
-  let template = libxmljs.parseXml(`<wrapper>${brain[responsePatterns[0]]}</wrapper>`).childNodes();
+  let template = libxmljs.parseXml(`<wrapper>${input.template}</wrapper>`).childNodes();
+
   let output = '';
 
   template.forEach(function(item) {
     if (item.type() === 'element') {
       if (aimlTags[item.name()]) {
-        output += aimlTags[item.name()](item.text(), brain, logger);
+
+        let attrs = item.attrs();
+        let attrsRaw = {};
+
+        for (let i in attrs) {
+          attrsRaw[attrs[i].name()] = attrs[i].value();
+        }
+
+        let content = _.join(_.forEach(item.childNodes(), (item) => {
+          return item.toString();
+        }), ' ');
+
+
+        let inputData = {
+          raw: content,
+          normalized: content,
+          template: input.template,
+          wildcards: input.wildcards,
+          attributes: attrsRaw
+        };
+
+        output += aimlTags[item.name()](inputData, session, environment, logger);
       } else {
         output += item.toString();
       }
