@@ -10,6 +10,7 @@
     "start": "node cli.js",
     "babel-node": "babel-node --presets=env --ignore='foo|bar|baz' cli.js",
     "test": "mocha --compilers js:babel-register --recursive",
+    "coverage": "nyc npm test",
     "compile": "babel -d lib src"
   },
   "author": "Brandon Morrison <brandon@brandonmorrison.com> (http://brandonmorrison.com)",
@@ -40,6 +41,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-watch": "^4.3.10",
     "mocha": "^4.0.1",
+    "nyc": "^11.2.1",
     "proxyquire": "^1.8.0",
     "sinon": "^4.0.1"
   }
