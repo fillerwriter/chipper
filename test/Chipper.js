@@ -35,7 +35,7 @@ describe('Chipper', function() {
   });
 
   describe('.environment', function() {
-    it('placeholder', function() {
+    it('expects .environment() method to return Environment object.', function() {
       expect(bot.environment()).to.exist;
     });
   });
