@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node cli.js",
     "babel-node": "babel-node --presets=env --ignore='foo|bar|baz' cli.js",
-    "test": "mocha --compilers js:babel-register --recursive",
+    "test": "mocha --require babel-register --recursive",
     "coverage": "nyc npm test",
     "compile": "babel -d lib src"
   },

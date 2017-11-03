@@ -45,6 +45,8 @@ Chipper is working to cover [AIML 2.0 spec](https://docs.google.com/document/d/1
 * Capture
   * ✔ Set
   * — Gossip
+  * — Request
+  * — Response
 * Symbolic Reduction
   * ✔ SRAI
 * Transformationals
