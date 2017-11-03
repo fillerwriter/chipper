@@ -1,7 +1,5 @@
 "use strict";
 
-var BaseNode = require('../BaseNode');
-
 /**
  * From AIML Spec
  * http://www.alicebot.org/TR/2001/WD-aiml/#section-uppercase
@@ -20,10 +18,7 @@ var BaseNode = require('../BaseNode');
  *
  * See Unicode Case Mapping for implementation suggestions. 
  */
-module.exports = class Uppercase extends BaseNode {
-  getText (callback) {
-    this.evaluateChildren(function (err, text) {
-      callback(err, text.toUpperCase());
-    });
-  }
-};
+
+export default function Uppercase(input, session, environment, logger) {
+  return input.toUpperCase();
+}
