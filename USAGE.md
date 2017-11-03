@@ -27,7 +27,7 @@ Chipper is working to cover [AIML 2.0 spec](https://docs.google.com/document/d/1
   * — Person2
   * — Gender
 * System
-  * — Date
+  * ✔ Date
   * — Size
   * — Version
 * Formatting
@@ -43,7 +43,7 @@ Chipper is working to cover [AIML 2.0 spec](https://docs.google.com/document/d/1
   * — Condition
   * — Random
 * Capture
-  * — Set
+  * ✔ Set
   * — Gossip
 * Symbolic Reduction
   * ✔ SRAI
