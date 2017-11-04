@@ -44,13 +44,13 @@ class Chipper {
       return session;
     };
 
-    this.brain = buildBrain(fs.readFileSync(aimlSource), logger);
+    this.environment.brain = buildBrain(fs.readFileSync(aimlSource), logger);
   }
 
   talk(rawInput) {
     return new Promise((resolve, reject) => {
       // @TODO: Add brain to environment.
-      resolve(parse(rawInput, this.session(), this.brain, this.logger()));
+      resolve(parse(rawInput, this.session(), this.environment, this.logger()));
     });
   }
 }
@@ -86,9 +86,9 @@ function buildBrain(xmlDoc, logger) {
 function parse(rawInput, session, environment, logger) {
   const processedInput = inputProcessor(rawInput);
 
-  let responsePatterns = PatternMatcher.findMatches(processedInput.normalized, _.keys(environment));
+  let responsePatterns = PatternMatcher.findMatches(processedInput.normalized, _.keys(environment.brain));
 
-  processedInput.template = environment[responsePatterns[0]];
+  processedInput.template = environment.brain[responsePatterns[0]];
   processedInput.wildcards = getWildCardValues(processedInput.normalized, responsePatterns[0]);
 
   return processTemplate(processedInput, session, environment, logger);

@@ -34,4 +34,8 @@ module.exports = class Environment {
   exportState() {
     return this.state;
   }
+
+  importAIML() {
+
+  }
 };

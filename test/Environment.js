@@ -22,4 +22,8 @@ describe('Environment', function() {
     env.importState(envState);
     expect(env.exportState()).to.deep.equal(envState);
   });
+
+  it("Has the ability to import AIML files.", function() {
+    expect(env.importAIML).to.exist;
+  });
 });

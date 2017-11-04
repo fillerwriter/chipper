@@ -17,6 +17,10 @@
         <template><srai>HELLO</srai></template>
     </category>
     <category>
+        <pattern>SIZE</pattern>
+        <template>Size is <size /></template>
+    </category>
+    <category>
         <pattern>*</pattern>
         <template>Default</template>
     </category>

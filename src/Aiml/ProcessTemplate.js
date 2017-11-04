@@ -17,7 +17,7 @@ import InputProcessor from "./InputProcessor";
  */
 
 export default function processTemplate(input, session, environment, logger) {
-  logger.info("process template", input);
+  logger.debug("process template", input);
 
   let template = libxmljs.parseXml(`<wrapper>${input.template}</wrapper>`).childNodes();
 

@@ -1,7 +1,5 @@
 "use strict";
 
-var BaseNode = require('../BaseNode');
-
 /**
  * From AIML Spec
  * http://www.alicebot.org/TR/2001/WD-aiml/#section-system-defined-predicates
@@ -14,12 +12,9 @@ var BaseNode = require('../BaseNode');
  * <!-- Category: aiml-template-elements -->
  * <aiml:size/>
  */
-module.exports = class Size extends BaseNode {
-  constructor (node, surly) {
-    super(node, surly);
-  }
 
-  getText (callback) {
-    callback(null, this.surly.environment.countCategories());
-  }
-};
+import _ from "lodash";
+
+export default function Size(input, session, environment, logger) {
+  return _.size(environment.brain);
+}
