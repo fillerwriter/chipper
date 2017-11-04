@@ -1,7 +1,6 @@
 "use strict";
 
 import bunyan from "bunyan";
-import libxmljs from "libxmljs";
 import fs from 'fs';
 import Promise from "bluebird";
 import _ from "lodash";
@@ -32,6 +31,8 @@ class Chipper {
       environment = new Environment();
     }
 
+    environment.importAIML(fs.readFileSync(aimlSource), logger);
+
     this.logger = function() {
       return logger;
     };
@@ -43,37 +44,16 @@ class Chipper {
     this.session = function() {
       return session;
     };
-
-    this.environment.brain = buildBrain(fs.readFileSync(aimlSource), logger);
   }
 
   talk(rawInput) {
     return new Promise((resolve, reject) => {
-      // @TODO: Add brain to environment.
-      resolve(parse(rawInput, this.session(), this.environment, this.logger()));
+      resolve(parse(rawInput, this.session(), this.environment(), this.logger()));
     });
   }
 }
 
 export default Chipper;
-
-function buildBrain(xmlDoc, logger) {
-  let parsed = libxmljs.parseXml(xmlDoc);
-  let brain = {};
-
-  let categories = parsed.find('category');
-
-  categories.forEach((item) => {
-    let pattern = item.find('pattern')[0].text();
-    brain[pattern] = item.find('template')[0].childNodes().reduce(function(a, b) {
-      return a + b.toString();
-    }, '');
-  });
-
-  logger.debug("Brain Size: " + Object.keys(brain).length);
-
-  return brain;
-}
 
 /**
  * Takes raw string input and processes it with a brain object to determine bot response.

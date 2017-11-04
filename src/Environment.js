@@ -1,5 +1,7 @@
 "use strict";
 
+import libxmljs from "libxmljs";
+
 /**
  * Handles the AIML chat environment. Keeps track of variables, bot attributes,
  * user attributes etc.
@@ -35,7 +37,28 @@ module.exports = class Environment {
     return this.state;
   }
 
-  importAIML() {
+  /**
+   *
+   * @param xmlDoc
+   * @param logger
+   * @returns {{}}
+   */
+  importAIML(xmlDoc, logger) {
+    let parsed = libxmljs.parseXml(xmlDoc);
+    let brain = {};
 
+    let categories = parsed.find('category');
+
+    categories.forEach((item) => {
+      let pattern = item.find('pattern')[0].text();
+      brain[pattern] = item.find('template')[0].childNodes().reduce(function(a, b) {
+        return a + b.toString();
+      }, '');
+    });
+
+    logger.debug("Brain Size: " + Object.keys(brain).length);
+
+    this.brain = brain;
+    return brain;
   }
 };
