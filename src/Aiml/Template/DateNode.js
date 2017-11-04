@@ -14,6 +14,6 @@
  * <aiml:date/>
  */
 
-export default function DateNode(input, brain, logger) {
+export default function DateNode(input, session, environment, logger) {
   return new Date().toISOString();
 }

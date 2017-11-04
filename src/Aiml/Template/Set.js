@@ -46,9 +46,6 @@
 //   }
 // };
 
-
-// @TODO: Set doesn't work yet because the input from upstream doesn't contain the raw xml content
-// from the child tag of Set.
 import processTemplate from "../ProcessTemplate";
 
 export default function Set(input, session, environment, logger) {

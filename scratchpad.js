@@ -11,14 +11,8 @@ let bot = new Chipper({
   logger: bunyan.createLogger({name: 'Chipper', level: 'debug'})
 });
 
-bot.talk('size')
+bot.talk('set foo bar')
   .then((result) => {
     console.log("Output: " + result);
     console.log(bot.session());
   });
-
-// bot.talk('set foo bar')
-//   .then((result) => {
-//     console.log("Output: " + result);
-//     console.log(bot.session());
-//   });
