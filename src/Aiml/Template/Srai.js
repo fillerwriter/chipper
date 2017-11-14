@@ -20,7 +20,18 @@
  */
 
 import processTemplate from "../ProcessTemplate";
+import * as PatternMatcher from "../../PatternMatcher";
+import inputProcessor from "../InputProcessor";
+import _ from "lodash";
+
 
 export default function Srai(input, session, environment, logger) {
-  return processTemplate(input, session, environment, logger);
+  const processedInput = inputProcessor(input.raw);
+
+  let responsePatterns = PatternMatcher.findMatches(processedInput.normalized, _.keys(environment.brain));
+
+  processedInput.template = environment.brain[responsePatterns[0]];
+  processedInput.wildcards = PatternMatcher.getWildCardValues(processedInput.normalized, responsePatterns[0]);
+
+  return processTemplate(processedInput, session, environment, logger);
 }

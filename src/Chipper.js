@@ -64,41 +64,16 @@ export default Chipper;
  * @returns string output.
  */
 function parse(rawInput, session, environment, logger) {
+  session.prevChat.push(rawInput);
+
   const processedInput = inputProcessor(rawInput);
 
   let responsePatterns = PatternMatcher.findMatches(processedInput.normalized, _.keys(environment.brain));
 
   processedInput.template = environment.brain[responsePatterns[0]];
-  processedInput.wildcards = getWildCardValues(processedInput.normalized, responsePatterns[0]);
+  processedInput.wildcards = PatternMatcher.getWildCardValues(processedInput.normalized, responsePatterns[0]);
 
-  return processTemplate(processedInput, session, environment, logger);
-}
-
-// @TODO: Move to tested method.
-function getWildCardValues (input, pattern) {
-  let replace_array = pattern.split('*');
-
-  for(let replacementItem in replace_array) {
-    input = input.replace(replace_array[replacementItem], '|');
-  }
-
-  // split by pipe and we're left with values and empty strings
-  input = input.trim().split('|');
-
-  let output = [];
-  let chunk = '';
-
-  for (let i = 0; i < input.length; i++) {
-    chunk = input[i].trim();
-
-    if (chunk === '') continue;
-
-    if (chunk.charAt(chunk.length - 1) === '?') {
-      chunk = chunk.substr(0, chunk.length - 1);
-    }
-
-    output.push(chunk);
-  }
-
-  return output;
+  let response = processTemplate(processedInput, session, environment, logger);
+  session.prevResponses.push(response);
+  return response;
 }

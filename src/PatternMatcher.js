@@ -90,3 +90,37 @@ export function isMatch(searchTerm, patterns = []) {
 
   return matches.length > 0;
 }
+
+/**
+ *
+ * @param input
+ * @param pattern
+ * @returns {Array}
+ */
+export function getWildCardValues (input, pattern) {
+  let replace_array = pattern.split('*');
+
+  for(let replacementItem in replace_array) {
+    input = input.replace(replace_array[replacementItem], '|');
+  }
+
+  // split by pipe and we're left with values and empty strings
+  input = input.trim().split('|');
+
+  let output = [];
+  let chunk = '';
+
+  for (let i = 0; i < input.length; i++) {
+    chunk = input[i].trim();
+
+    if (chunk === '') continue;
+
+    if (chunk.charAt(chunk.length - 1) === '?') {
+      chunk = chunk.substr(0, chunk.length - 1);
+    }
+
+    output.push(chunk);
+  }
+
+  return output;
+}
