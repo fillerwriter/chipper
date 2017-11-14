@@ -3,9 +3,7 @@
 import libxmljs from "libxmljs";
 import * as _ from 'lodash';
 
-import * as PatternMatcher from "../PatternMatcher";
 import aimlTags from "./AimlTags";
-import InputProcessor from "./InputProcessor";
 
 /**
  * Simple parsing of input from a user using a key=>map dataset.
@@ -17,7 +15,7 @@ import InputProcessor from "./InputProcessor";
  */
 
 export default function processTemplate(input, session, environment, logger) {
-  logger.info("process template", input);
+  logger.debug("process template", input);
 
   let template = libxmljs.parseXml(`<wrapper>${input.template}</wrapper>`).childNodes();
 
@@ -38,7 +36,6 @@ export default function processTemplate(input, session, environment, logger) {
           return item.toString();
         }), ' ');
 
-
         let inputData = {
           raw: content,
           normalized: content,
@@ -56,6 +53,6 @@ export default function processTemplate(input, session, environment, logger) {
     }
   });
 
-  logger.info("Output snippet", output);
+  logger.debug("Output snippet", output);
   return output;
 }

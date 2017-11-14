@@ -10,6 +10,7 @@
     "start": "node cli.js",
     "babel-node": "babel-node --presets=env --ignore='foo|bar|baz' cli.js",
     "test": "mocha --require babel-register --recursive",
+    "e2etest": "mocha --require babel-register e2e",
     "coverage": "nyc npm test",
     "compile": "babel -d lib src"
   },

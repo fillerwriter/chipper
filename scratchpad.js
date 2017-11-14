@@ -7,8 +7,8 @@ import bunyan from "bunyan";
 
 
 let bot = new Chipper({
-  'aiml': 'data/aiml_simple/simple.aiml',
-  // logger: bunyan.createLogger({name: 'Chipper', level: 'debug'})
+  aiml: 'data/aiml_simple/simple.aiml',
+  logger: bunyan.createLogger({name: 'Chipper', level: 'debug'})
 });
 
 bot.talk('set foo bar')
