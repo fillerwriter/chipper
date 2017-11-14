@@ -1,6 +1,11 @@
 "use strict";
 
-const expect = require('chai').expect;
+const chai = require('chai');
+const chaiAsPromised = require("chai-as-promised");
+
+chai.use(chaiAsPromised);
+
+const expect = chai.expect;
 
 import Chipper from '../src/Chipper';
 
@@ -8,17 +13,14 @@ describe('Chipper', function() {
   let bot;
 
   beforeEach(function() {
-    bot = new Chipper();
+    bot = new Chipper({
+      aiml: 'e2e/aiml_simple/simple.aiml'
+    });
   });
 
-  it('exists and has methods', function() {
-    expect(bot).to.exist;
-    expect(bot).to.respondTo('talk');
-    expect(bot).to.respondTo('logger');
-    expect(bot).to.respondTo('environment');
-  });
+  it('chats', function() {
+    let result = bot.talk('hello');
 
-  it('has sane defaults', function() {
-    expect(true).to.be.true;
+    expect(result).to.eventually.equal('Foo<br/>Bar');
   });
 });

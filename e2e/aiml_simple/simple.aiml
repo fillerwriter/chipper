@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<aiml>
+    <category>
+        <pattern>TEST STAR *</pattern>
+        <template><star index="1"></star></template>
+    </category>
+    <category>
+        <pattern>SET * *</pattern>
+        <template>Setting <set var="foo"><star index="1"></star></set></template>
+    </category>
+    <category>
+        <pattern>HELLO</pattern>
+        <template>Foo<br />Bar</template>
+    </category>
+    <category>
+        <pattern>HI</pattern>
+        <template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern>SIZE</pattern>
+        <template>Size is <size /></template>
+    </category>
+    <topic name="foo">
+        <category>
+            <pattern>FOO</pattern>
+            <template>Bar</template>
+        </category>
+    </topic>
+    <category>
+        <pattern>*</pattern>
+        <template>Default</template>
+    </category>
+</aiml>
