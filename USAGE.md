@@ -32,8 +32,8 @@ Chipper is working to cover [AIML 2.0 spec](https://docs.google.com/document/d/1
   * — Version
 * Formatting
   * ✔ Uppercase
-  * — Lowercase
-  * — Formal
+  * ✔ Lowercase
+  * ✔ Formal
   * — Sentence
 * List
   * — First

@@ -23,4 +23,10 @@ describe('Chipper', function() {
 
     expect(result).to.eventually.equal('Foo<br/>Bar');
   });
+
+  it('formats text to uppercase', function() {
+    let result = bot.talk("Uppercase hello");
+
+    expect(result).to.eventually.equal("Uppercase HELLO");
+  });
 });

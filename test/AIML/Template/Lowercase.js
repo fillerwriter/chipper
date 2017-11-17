@@ -10,15 +10,15 @@ let logger = bunyan.createLogger({name: 'Chipper'});
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-import Uppercase from "../../../src/Aiml/Template/Uppercase";
+import Lowercase from "../../../src/Aiml/Template/Lowercase";
 
 
-describe("AIML - uppercase tag", function() {
+describe("AIML - lowercase tag", function() {
   before(function() {
   });
 
-  it("returns content as uppercase.", function() {
-    const result = Uppercase({normalized: 'hello'}, {}, {}, logger);
-    expect(result).to.equal('HELLO');
+  it("returns content as lowercase.", function() {
+    const result = Lowercase({normalized: 'HELLO'}, {}, {}, logger);
+    expect(result).to.equal('hello');
   });
 });

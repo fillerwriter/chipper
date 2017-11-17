@@ -1,7 +1,5 @@
 "use strict";
 
-var BaseNode = require('../BaseNode');
-
 /**
  * From AIML Spec
  * http://www.alicebot.org/TR/2001/WD-aiml/#section-lowercase
@@ -21,10 +19,6 @@ var BaseNode = require('../BaseNode');
  *
  * See Unicode Case Mapping for implementation suggestions.
  */
-module.exports = class Lowercase extends BaseNode {
-  getText (callback) {
-    this.evaluateChildren(function (err, text) {
-      callback(err, text.toLowerCase());
-    });
-  }
-};
+export default function Lowercase(input, session, environment, logger) {
+  return input.normalized.toLowerCase();
+}

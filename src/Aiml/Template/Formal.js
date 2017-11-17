@@ -1,7 +1,5 @@
 "use strict";
 
-var BaseNode = require('../BaseNode');
-
 /**
  * From AIML Spec
  * http://www.alicebot.org/TR/2001/WD-aiml/#section-formal
@@ -22,15 +20,9 @@ var BaseNode = require('../BaseNode');
  *
  * See Unicode Case Mapping for implementation suggestions.
  */
-module.exports = class Formal extends BaseNode {
-  getText (callback) {
-    this.evaluateChildren(function (err, text) {
-      text = text
-        .toLowerCase()
-        .replace(/(?:^|\s)\S/g, function(a) {
-          return a.toUpperCase();
-        });
-      callback(err, text);
+export default function Lowercase(input, session, environment, logger) {
+  return input.normalized.toLowerCase()
+    .replace(/(?:^|\s)\S/g, function(a) {
+      return a.toUpperCase();
     });
-  }
 };

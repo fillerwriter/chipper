@@ -20,5 +20,5 @@
  */
 
 export default function Uppercase(input, session, environment, logger) {
-  return input.toUpperCase();
+  return input.normalized.toUpperCase();
 }

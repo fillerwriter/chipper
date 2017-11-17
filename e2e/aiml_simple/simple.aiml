@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <aiml>
     <category>
+        <pattern>UPPERCASE HELLO</pattern>
+        <template>Uppercase <uppercase>hello</uppercase></template>
+    </category>
+    <category>
         <pattern>TEST STAR *</pattern>
         <template><star index="1"></star></template>
     </category>
